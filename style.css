@@ -202,7 +202,8 @@ table.foottable td {
 
 #content a {
 	color: #000000;
-	font-weight: bold;
+	font-weight: plain;
+	/*font-weight: bold;*/
 	text-decoration: none;
 }
 
