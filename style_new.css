@@ -64,18 +64,20 @@ table.headtable td {
 	color: #000000;
 }
 
-#content important {
-	/*margin: 25px 0px 10px 0px;*/
+#content imp {
 	text-align: left;
-	font-size: 14px;
-	color: #FF0000;
-	font-weight: normal;bold;
+	font-size: 15px;
+	color: #FF4500;
+	font-weight: normal;
 	padding-left: 10px;
+	padding-right:10px;
+	/*background: #ffe7e7;
+	border:1px solid #707070;*/
 }
 
 #content a {
 	color: #000000;
-	font-weight: plain;
+	font-weight: normal;
 	/*font-weight: bold;*/
 	text-decoration: none;
 }
