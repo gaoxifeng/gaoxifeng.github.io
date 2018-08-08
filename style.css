@@ -32,7 +32,7 @@ table.headtable td {
 	margin:auto;
 	width: 800px;
 	/*min-height: 800px;*/
-	border:0px;
+	/*border:0px;*/
 	background: #eeeeee;
 	/*background: #e0e0e0;*/
 	font-size: 14px;
@@ -65,12 +65,14 @@ table.headtable td {
 }
 
 #content imp {
-	text-align: left;
+	/*text-align: left;*/
 	font-size: 15px;
-	color: #FF4500;
+	color: #000000;/*FF4500;*/
 	font-weight: normal;
 	padding-left: 10px;
 	padding-right:10px;
+	margin:auto;
+	text-align: center;
 	/*background: #ffe7e7;
 	border:1px solid #707070;*/
 }
