@@ -77,6 +77,19 @@ table.headtable td {
 	border:1px solid #707070;*/
 }
 
+#content notice{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	box-shadow: 1px 1px 1px #888;
+	background-color: #b0abab;
+	/*border: 1px solid #666;
+	border-radius: 8px;*/
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	display: block;
+  }
+
 #content a {
 	color: #008744;
 	font-weight: normal;
