@@ -1,0 +1,13 @@
+title: Xifeng Gao
+description: >-
+  Principal Researcher at Lightspeed Studios, Tencent.
+  Research in Geometry Computing, Computer Graphics, and Content Generation.
+url: https://gaoxifeng.github.io
+baseurl: ""
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Uncomment and add your GA4 measurement ID to enable Google Analytics
+# google_analytics: G-XXXXXXXXXX

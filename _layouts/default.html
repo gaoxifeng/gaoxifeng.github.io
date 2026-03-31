@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% seo %}
+<link href="style.css" rel="stylesheet" type="text/css" media="screen"/>
+</head>
+<body>
+
+{{ content }}
+
+<table class="foottable">
+  <tr>
+    <td>&copy; Copyright by <a href="{{ site.url }}">Xifeng Gao</a>. All rights reserved.</td>
+  </tr>
+</table>
+
+{% if site.google_analytics and site.google_analytics != "" %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ site.google_analytics }}');
+</script>
+{% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img[src*="papers/"]').forEach(function(img) {
+    var orig = img.getAttribute('src');
+    if (!/\.(webp|gif)$/i.test(orig)) {
+      img.setAttribute('src', orig.replace(/\.(jpg|jpeg|png|gif)$/i, '.webp'));
+      img.onerror = function() { this.src = orig; this.onerror = null; };
+    }
+  });
+
+  var table = document.querySelector('.projecttable');
+  if (!table) return;
+  var tbody = table.querySelector('tbody') || table;
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  var groups = {}, order = [];
+
+  rows.forEach(function(row) {
+    var y = getYear(row);
+    if (y) {
+      row.setAttribute('data-year', y);
+      if (!groups[y]) { groups[y] = []; order.push(y); }
+      groups[y].push(row);
+    }
+  });
+
+  var cutoff = new Date().getFullYear() - 3;
+
+  order.forEach(function(year) {
+    var first = groups[year][0];
+    var hr = document.createElement('tr');
+    hr.className = 'year-separator';
+    var td = document.createElement('td');
+    td.setAttribute('colspan', '2');
+    td.className = 'year-header-cell';
+    td.innerHTML = '<span class="year-label">' + year + '</span> ' +
+      '<span class="paper-count">(' + groups[year].length + ')</span> ' +
+      '<span class="toggle-icon">\u25BC</span>';
+    hr.appendChild(td);
+    hr.style.cursor = 'pointer';
+    hr.addEventListener('click', function() {
+      var c = this.classList.toggle('collapsed');
+      groups[year].forEach(function(r) { r.style.display = c ? 'none' : ''; });
+      this.querySelector('.toggle-icon').textContent = c ? '\u25B6' : '\u25BC';
+    });
+    first.parentNode.insertBefore(hr, first);
+
+    if (parseInt(year) < cutoff) {
+      hr.classList.add('collapsed');
+      groups[year].forEach(function(r) { r.style.display = 'none'; });
+      hr.querySelector('.toggle-icon').textContent = '\u25B6';
+    }
+  });
+
+  function getYear(row) {
+    var info = row.querySelector('.paperInfo');
+    if (info) {
+      var it = info.querySelector('i');
+      if (it) {
+        var m = it.textContent.match(/\b(20\d{2})\b/g);
+        if (m) return m[m.length - 1];
+      }
+    }
+    var img = row.querySelector('img');
+    if (img) {
+      var s = img.getAttribute('src');
+      if (s) { var p = s.match(/papers\/(\d{4})\//); if (p) return p[1]; }
+    }
+    return null;
+  }
+});
+</script>
+
+</body>
+</html>
