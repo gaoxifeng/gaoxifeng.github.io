@@ -1,14 +1,17 @@
+* {
+	box-sizing: border-box;
+}
+
 body {
 	background: #ffffff;
-	/*background: #254117;*/
-	/*background-image: url('images/website-background.jpg'); url('imgs/background_flash.gif');*/
 	font-family: Verdana, Helvetica,  Arial, sans-serif;
 	margin:0;
 	padding:0;
 }
 
 table.headtable {
-	width:800px;
+	max-width:800px;
+	width: 100%;
 	border-width: 0px;
 	border-collapse: collapse;
 	background-color: #eeeeee;
@@ -30,16 +33,20 @@ table.headtable td {
 
 #content {
 	margin:auto;
-	width: 800px;
-	/*min-height: 800px;*/
-	/*border:0px;*/
+	max-width: 800px;
+	width: 100%;
 	background: #eeeeee;
-	/*background: #e0e0e0;*/
 	font-size: 14px;
 	text-align: justify;
-	/*padding: 0px;*/
+	padding: 0 10px;
 	padding-bottom: 50px;
 	height: auto;
+}
+
+.content-inner {
+	max-width: 800px;
+	width: 100%;
+	margin: auto;
 }
 #content h1 {
 	font-size: 30px;
@@ -77,17 +84,17 @@ table.headtable td {
 	border:1px solid #707070;*/
 }
 
-#content notice{
+#content .notice,
+.content-inner .notice {
 	margin-top: 30px;
 	margin-bottom: 30px;
 	box-shadow: 1px 1px 1px #888;
 	background-color: #b0abab;
-	/*border: 1px solid #666;
-	border-radius: 8px;*/
-	padding: 5px;
-	padding-left: 20px;
-	padding-right: 20px;
+	border-radius: 6px;
+	padding: 12px 20px;
 	display: block;
+	text-align: center;
+	font-size: 14px;
   }
 
 #content a {
@@ -107,11 +114,11 @@ table.headtable td {
 }
 
 table.newstable {
-	width:800px;
+	max-width:800px;
+	width: 100%;
 	border-width: 0px;
 	border-collapse: collapse;
 	background-color: #eeeeee;
-	/*background-color: #dedede;*/
 	margin:auto;
 }
 table.newstable th {
@@ -139,11 +146,11 @@ table.newstable td {
 }
 
 table.projecttable {
-	width:800px;
+	max-width:800px;
+	width: 100%;
 	border-width: 0px;
 	border-collapse: collapse;
 	background-color: #eeeeee;
-	/*background-color: #dedede;*/
 	margin:auto;
 }
 table.projecttable th {
@@ -169,7 +176,8 @@ table.projecttable td {
 	padding-top: 25px;
 }
 table.foottable {
-	width:800px;
+	max-width:800px;
+	width: 100%;
 	border-width: 0px;
 	border-color: #666666;
 	border-collapse: collapse;
@@ -259,4 +267,62 @@ table.foottable td {
 #paperlink span {
     vertical-align:bottom;
 	display: table-cell;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+@media screen and (max-width: 600px) {
+	#content {
+		padding: 0 8px;
+		font-size: 13px;
+	}
+
+	#content h1 {
+		font-size: 22px;
+	}
+
+	#content h2 {
+		font-size: 17px;
+	}
+
+	table.headtable th,
+	table.headtable td {
+		display: block;
+		width: 100%;
+		text-align: center;
+		padding: 10px;
+	}
+
+	table.headtable td {
+		padding-right: 0;
+	}
+
+	table.headtable td img {
+		margin: 0 auto;
+		display: block;
+	}
+
+	table.projecttable th,
+	table.projecttable td {
+		display: block;
+		width: 100% !important;
+		padding: 8px;
+	}
+
+	table.projecttable th {
+		text-align: center;
+		padding-top: 20px;
+	}
+
+	table.projecttable th img {
+		margin: 0 auto;
+		display: block;
+	}
+
+	table.projecttable td {
+		padding-top: 5px;
+	}
 }
