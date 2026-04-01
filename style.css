@@ -7,9 +7,6 @@ body {
 	font-family: Verdana, Helvetica,  Arial, sans-serif;
 	margin:0;
 	padding:0;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
 }
 
 table.headtable {
@@ -35,7 +32,6 @@ table.headtable td {
 }
 
 #content {
-	flex: 1;
 	margin:auto;
 	max-width: 800px;
 	width: 100%;
