@@ -39,7 +39,7 @@ table.headtable td {
 	font-size: 14px;
 	text-align: justify;
 	padding: 0 10px;
-	padding-bottom: 50px;
+	padding-bottom: 15px;
 	height: auto;
 }
 
@@ -296,7 +296,12 @@ img {
 }
 
 .year-separator td {
-	padding: 20px 0 8px 0 !important;
+	padding: 16px 0 6px 0 !important;
+	width: 100% !important;
+}
+
+.year-separator.collapsed td {
+	padding: 6px 0 6px 0 !important;
 }
 
 .year-header-cell {
