@@ -28,7 +28,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('img[src*="papers/"]').forEach(function(img) {
+  document.querySelectorAll('img[src*="papers/"], img[src*="images/"]').forEach(function(img) {
     var orig = img.getAttribute('src');
     if (!/\.(webp|gif)$/i.test(orig)) {
       img.setAttribute('src', orig.replace(/\.(jpg|jpeg|png|gif)$/i, '.webp'));
@@ -53,30 +53,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var cutoff = new Date().getFullYear() - 3;
 
+  function syncYearRow(hr, year) {
+    var collapsed = hr.classList.contains('collapsed');
+    groups[year].forEach(function(r) { r.style.display = collapsed ? 'none' : ''; });
+    hr.querySelector('.toggle-icon').textContent = collapsed ? '\u25B6' : '\u25BC';
+    hr.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+  }
+
   order.forEach(function(year) {
     var first = groups[year][0];
     var hr = document.createElement('tr');
     hr.className = 'year-separator';
+    hr.setAttribute('role', 'button');
+    hr.setAttribute('tabindex', '0');
+    hr.setAttribute('aria-label', 'Toggle ' + year + ' publications');
     var td = document.createElement('td');
     td.setAttribute('colspan', '2');
     td.className = 'year-header-cell';
     td.innerHTML = '<span class="year-label">' + year + '</span> ' +
       '<span class="paper-count">(' + groups[year].length + ')</span> ' +
-      '<span class="toggle-icon">\u25BC</span>';
+      '<span class="toggle-icon" aria-hidden="true">\u25BC</span>';
     hr.appendChild(td);
     hr.style.cursor = 'pointer';
-    hr.addEventListener('click', function() {
-      var c = this.classList.toggle('collapsed');
-      groups[year].forEach(function(r) { r.style.display = c ? 'none' : ''; });
-      this.querySelector('.toggle-icon').textContent = c ? '\u25B6' : '\u25BC';
+    function toggleYear() {
+      hr.classList.toggle('collapsed');
+      syncYearRow(hr, year);
+    }
+    hr.addEventListener('click', toggleYear);
+    hr.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleYear();
+      }
     });
     first.parentNode.insertBefore(hr, first);
 
-    if (parseInt(year) < cutoff) {
+    if (parseInt(year, 10) < cutoff) {
       hr.classList.add('collapsed');
-      groups[year].forEach(function(r) { r.style.display = 'none'; });
-      hr.querySelector('.toggle-icon').textContent = '\u25B6';
     }
+    syncYearRow(hr, year);
   });
 
   function getYear(row) {
